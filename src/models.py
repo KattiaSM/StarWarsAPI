@@ -79,23 +79,20 @@ class Planets(db.Model):
 
 class Favoritos(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    idUser = db.Column(db.String(120))
-    idPeople = db.Column(db.String(120))
-    idPlanets = db.Column(db.String(120))
+    id_user = db.Column(db.Integer, ForeignKey('User.id'))
+    User = relationship(User)
+    id_people = db.Column(db.Integer, ForeignKey('People.id'))
+    People = relationship(People)
+    idPlanets = db.Column(db.Integer, ForeignKey('Planets.id'))
+    Planets = relationship(Planets)
 
     def __repr__(self):
         return '<Favoritos %r>' % self.username
 
     def serialize(self):
         return {
-            "id": self.id,
-            "name": self.name,
-            "diameter": self.diameter,
-            "rotation_period": self.rotation_period,
-            "orbital_period": self.orbital_period,
-            "population": self.population,
-            "climate": self.climate,
-            "terrain": self.terrain,
-            "surface_water": self.surface_water,  
+            "id_user": self.id_user,
+            "id_people": self.id_people,
+            "id_planets": self.idPlanets, 
         }
 
