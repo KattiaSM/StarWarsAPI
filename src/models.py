@@ -76,6 +76,22 @@ class Planets(db.Model):
             "surface_water": self.surface_water,  
         }
 
+class userFavoritos(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    id_user = db.Column(db.Integer, db.ForeignKey('user.id'))
+    id_people = db.Column(db.Integer, db.ForeignKey('people.id'))
+    id_planets = db.Column(db.Integer, db.ForeignKey('planets.id'))
+
+    def __repr__(self):
+        return '<userFavoritos %r>' % self.username
+
+    def serialize(self):
+        return {
+            "id_user": self.id_user,
+            "id_people": self.id_people,
+            "id_planets": self.id_planets, 
+        }
+
 class Favoritos(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_user = db.Column(db.Integer, db.ForeignKey('user.id'))
