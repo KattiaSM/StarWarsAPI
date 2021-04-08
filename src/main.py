@@ -76,11 +76,12 @@ def planets():
 def favoritos():
 
     request_body = request.get_json()
-    fav = Favoritos(id_user=request_body[ "id_user"], id_people=request_body[ "id_people"], id_planets=request_body["id_planets"])
+    fav = Favoritos(id_user=request_body["id_user"], fav_people=request_body["fav_people"], id_planets=request_body["fav_planets"])
     db.session.add(fav)
     db.session.commit()
 
     return jsonify("Agregado a tus favoritos"), 200
+
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
